@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.9.0/dist/full.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- <link href="daisyuistyle.css" rel="stylesheet" type="text/css" /> -->
+
+    <script src="apptailwind.js"></script>
+
+<style>
+  #column1 > label:nth-child(3) > textarea{
+
+    max-height : "2px" !important;
+  }
+        .file-input {
+        display: none;
+        }
+        .smaller-textarea {
+    height: 50px; /* Adjust this value as needed */
+}
+        .mask {
+        border: none !important;
+        }
+    .upload-icon {
+        padding: 10px;
+        background-color: #7480ff; /* Change this to your desired color */
+        color: white;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .upload-icon:hover {
+        background-color: #0069D9; /* Change this to a slightly darker version of your desired color */
+    }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        td {
+            vertical-align: middle;
+            border: 1px solid rgba(53, 183, 223, 0.08); /* Optional border styling with 20% opacity */
+        
+        }
+        #excelTable tr {
+  height: 2rem; /* Adjust this value to your desired height */
+  max-height: 2rem; /* Ensure the height does not exceed this value */
+}
+#excelTable th:first-child,
+#excelTable td:first-child {
+  font-size: 1rem;
+  font-weight: bold;
+}
+#excelTable td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  
+}
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        .btn {
+        margin-right: 10px; /* Adjust this value to increase or decrease the gap */
+    }
+
+        #openTableButton {
+    font-size: 1em; /* Adjust this value to make the "+" sign bigger or smaller */
+    font-weight: bold; /* Makes the text bold */
+}
+.input {
+        border-color: #7480ff; /* This sets the border color of the input field to the same color as the buttons */
+    }
+    td .mask.mask-squircle {
+    border: none;
+}
+
+.mask.mask-squircle {
+    border: none;
+}
+td.flex.items-center.gap-3 {
+        border: none;
+        justify-content: center; /* Horizontally center the content */
+    align-items: center;
+    }
+    td.flex.items-center.justify-center.gap-3 {
+    border: none;
+}
+
+.input {
+    max-width: 550px; 
+  }
+
+#my_modal_3 .input-xs {
+  
+  margin-bottom: 20px;
+  max-width: 150px;
+justify-content: center;
+padding:10px;
+}
+.modal-box {
+  width: 140%; /* Adjust this value to change the width of the modal box */
+  margin: 0 auto; /* Center the modal box */
+}
+</style>
+    <body>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
+
+        <header>
+            <nav class="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
+                <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
+                   
+           
+                       
+             
+                    <div class="flex items-center lg:order-2">
+                        <a href="#" class="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">Log in</a>
+                        <a href="#" class="text-gray bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">Get started</a>
+                        <button data-collapse-toggle="mobile-menu-2" type="button" class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mobile-menu-2" aria-expanded="false">
+                            <span class="sr-only">Open main menu</span>
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+                            <svg class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                        </button>
+                    </div>
+                    <div class="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1" id="mobile-menu-2">
+                        <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
+                            <li>
+                                <a href="#" class="block py-2 pr-4 pl-3 text-grey rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-grey" aria-current="page">Home</a>
+                            </li>
+                            <li>
+                                <a href="#" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Company</a>
+                            </li>
+                            <li>
+                                <a href="#" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Marketplace</a>
+                            </li>
+                            <li>
+                                <a href="#" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Features</a>
+                            </li>
+                            <li>
+                                <a href="#" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Team</a>
+                            </li>
+                            <li>
+                                <a href="#" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+                <div class="flex justify-between items-center">
+          <label class="form-control w-full max-w-xs">
+            <div class="label">
+              </div>
+          </label>
+          <div class="form-control w-52 h-full">
+            <label class="cursor-pointer label">
+              <span class="label-text">Table locked</span> 
+              <input type="checkbox" id="toggle" class="toggle toggle-primary" checked />
+            </label>
+          </div>          
+      </div>
+        <div>
+              <div class="navbar bg-base-100 h-full">
+                  <div class="flex-1">
+                      <a class="btn btn-ghost text-xl">KVO DADAR FORM</a>
+                  </div>
+                  <div class="flex-none gap-2">
+                    <div class="form-control">
+                      <div class="form-control flex flex-row">
+                        <input type="text" width = "300%" placeholder="Search" class="input input-bordered h-12 md:w-auto mr-2" id = "searchInput">
+                        <button class="btn btn-outline btn-primary" id = "downloadexcelbutton">
+                            <svg class="h-6 w-6 text-indigo-500"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                            </svg>  
+                        </button>
+
+                        <button for="file-input" class="btn btn-outline btn-primary" id = "uploadexcelbutton">
+                            <svg class="h-5 w-5 text-indigo-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="#7480ff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z"/>
+                                <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
+                                <polyline points="7 9 12 4 17 9" />
+                                <line x1="12" y1="4" x2="12" y2="16" />
+                            </svg>
+                        </button>
+
+
+                          <button class="btn btn-outline btn-primary" id="openTableButton">
+
+                            <svg class="h-6 w-6 text-indigo-500"  fill="none" width="24" height="24" viewBox="0 0 24 24" stroke="#7480ff">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z"/>
+                              </svg>
+                            </button>
+                        <input type="file" class="file-input file-input-bordered file-input-primary w-full max-w-xs" accept=".xlsx, .xls" id="file-input-xl" />
+                        </div>
+                             </div>
+                      <div class="dropdown dropdown-end">
+                          <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+                              <div class="w-10 rounded-full">
+                                  <img alt="Tailwind CSS Navbar component" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                              </div>
+                          </div>
+                          <ul tabindex="0" class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+                              <li>
+                                  <a class="justify-between">
+                                      Profile
+                                      <span class="badge">New</span>
+                                  </a>
+                              </li>
+                              <li><a>Settings</a></li>
+                              <li><a>Export to Excel</a></li>
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+
+            <div class="overflow-x-auto">
+                <table id="excelTable" class="table"></table>
+            </div>
+        
+        </div>
+        <div>
+
+            <button id = "savedatabutton" onclick="saveData()">Save Data</button>
+        </div>
+
+        <button id="openTableButton" class="btn">Open Modal</button>
+          
+          <!-- <dialog id="my_modal_3" class="modal">
+            <div class="modal-box">
+              <form method="dialog">
+                <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+              </form>
+              <label class="input input-bordered flex items-center input-xs   w-full max-w-xs">
+                <input type="text" class="grow" placeholder="Search" id="searchinput-input"  />
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4 opacity-70"><path fill-rule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clip-rule="evenodd" /></svg>
+              </label>
+                -->
+                <dialog id="my_modal_3" class="modal">
+                  <div class="modal-box w-6/12 max-w-5xl">
+                    <form method="dialog" >
+                      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                    </form>
+                    <label class="input input-bordered flex items-center input-xs max-w-none">
+                      <input type="text" class="grow" placeholder="Search" id="searchinput-input"  />
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4 opacity-70"><path fill-rule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clip-rule="evenodd"></path></svg>
+                    </label>
+
+              <div class="modal-content">
+                <div id="column1" class="column" style="float: left; width: 75%;">
+                    <h3 class="font-bold text-lg"></h3>
+                </div>
+
+
+
+                <div id="column2" class="column" style="float: right; width: 25%;">
+                    <div class="join join-vertical">
+
+                        
+                        <button class="btn join-item" style="border: none; background-color: transparent;">
+                              
+                        </button>
+                        <button class="btn join-item" id ="addbutton">
+
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                              </svg>
+                              
+                              
+
+                        </button>
+                        <button class="btn join-item" id ="subtractbutton">
+                            
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                              </svg>
+                              
+                        </button>
+                        <button class="btn join-item"  id ="nextbutton">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M3 8.689c0-.864.933-1.406 1.683-.977l7.108 4.061a1.125 1.125 0 0 1 0 1.954l-7.108 4.061A1.125 1.125 0 0 1 3 16.811V8.69ZM12.75 8.689c0-.864.933-1.406 1.683-.977l7.108 4.061a1.125 1.125 0 0 1 0 1.954l-7.108 4.061a1.125 1.125 0 0 1-1.683-.977V8.69Z" />
+                              </svg>
+                              
+                        </button>
+
+
+
+                        <button class="btn join-item"  id ="prebutton">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 16.811c0 .864-.933 1.406-1.683.977l-7.108-4.061a1.125 1.125 0 0 1 0-1.954l7.108-4.061A1.125 1.125 0 0 1 21 8.689v8.122ZM11.25 16.811c0 .864-.933 1.406-1.683.977l-7.108-4.061a1.125 1.125 0 0 1 0-1.954l7.108-4.061a1.125 1.125 0 0 1 1.683.977v8.122Z" />
+                              </svg>
+                              
+                              
+                        </button>
+
+
+                        <!-- <button class="btn join-item"  id ="searchbutton">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m15.75 15.75-2.489-2.489m0 0a3.375 3.375 0 1 0-4.773-4.773 3.375 3.375 0 0 0 4.774 4.774ZM21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                              </svg>
+                        </button> -->
+
+                        
+                        <button class="btn join-item"  id ="clearbutton">
+                        <svg class="h-6 w-6 "  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <circle cx="12" cy="12" r="9" />  <line x1="5.7" y1="5.7" x2="18.3" y2="18.3" /></svg>
+                      </button>
+                        <button class="btn join-item"  id ="imagebutton">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+                              </svg>
+                        </button>
+
+                        <input type="file" id="imageInputimagebutton" accept="image/*" multiple style="display: none;">
+
+                        <button class="btn join-item"  id ="savebutton">
+
+                        <svg class="h-6 w-6 text-indigo-500"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />  <polyline points="17 21 17 13 7 13 7 21" />  <polyline points="7 3 7 8 15 8" /></svg>
+</button>
+                      </div>
+
+                </div>
+              
+            </div>
+              <form method="dialog" class="modal-backdrop">
+                <button>close</button>
+              </form>
+            </div>
+          </dialog>
+
+          <div class="form-control w-52 h-full">
+            <label class="cursor-pointer label">
+              <span class="label-text">Table locked</span> 
+              <input type="checkbox" id="toggle" class="toggle toggle-primary" checked />
+            </label>
+          </div>
+          
+          <dialog id="passwordModal" class="modal">
+            <div class="modal-box">
+              <h2 class="text-xl">Enter Password</h2>
+              <div class="form-control">
+                <input type="password" id="passwordInput" placeholder="Password" class="input input-bordered">
+              </div>
+              <div class="form-control">
+                <button id="submitPassword" class="btn">Submit</button>
+              </div>
+            </div>
+          </dialog>
+        <footer class="footer footer-center p-10 bg-primary text-primary-content">
+          <aside>
+            <svg width="50" height="50" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" class="inline-block fill-current"><path d="M22.672 15.226l-2.432.811.841 2.515c.33 1.019-.209 2.127-1.23 2.456-1.15.325-2.148-.321-2.463-1.226l-.84-2.518-5.013 1.677.84 2.517c.391 1.203-.434 2.542-1.831 2.542-.88 0-1.601-.564-1.86-1.314l-.842-2.516-2.431.809c-1.135.328-2.145-.317-2.463-1.229-.329-1.018.211-2.127 1.231-2.456l2.432-.809-1.621-4.823-2.432.808c-1.355.384-2.558-.59-2.558-1.839 0-.817.509-1.582 1.327-1.846l2.433-.809-.842-2.515c-.33-1.02.211-2.129 1.232-2.458 1.02-.329 2.13.209 2.461 1.229l.842 2.515 5.011-1.677-.839-2.517c-.403-1.238.484-2.553 1.843-2.553.819 0 1.585.509 1.85 1.326l.841 2.517 2.431-.81c1.02-.33 2.131.211 2.461 1.229.332 1.018-.21 2.126-1.23 2.456l-2.433.809 1.622 4.823 2.433-.809c1.242-.401 2.557.484 2.557 1.838 0 .819-.51 1.583-1.328 1.847m-8.992-6.428l-5.01 1.675 1.619 4.828 5.011-1.674-1.62-4.829z"></path></svg>
+            <p class="font-bold">
+              TEJAS HARSHAD SHAH <br>stejas809@gmail.com
+            </p> 
+            <p>+91-8850362898</p>
+          </aside> 
+          <nav>
+            <div class="grid grid-flow-col gap-4">
+              <a><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path></svg></a>
+              <a><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"></path></svg></a>
+              <a><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path></svg></a>
+            </div>
+          </nav>
+        </footer>        
+        <script>
+document.getElementById('clearbutton').addEventListener('click', function() {
+  const textareas = document.querySelectorAll('#column1 textarea');
+  textareas.forEach((textarea) => {
+    textarea.value = '';
+  });
+});
+
+document.getElementById('uploadexcelbutton').addEventListener('click', function() {
+    document.getElementById('file-input-xl').click();
+});
+
+document.getElementById('downloadexcelbutton').addEventListener('click', saveData);
+  
+
+document.getElementById('file-input-xl').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const data = new Uint8Array(e.target.result);
+            const workbook = XLSX.read(data, { type: 'array' });
+            const worksheet = workbook.Sheets[workbook.SheetNames[0]];
+            console.log('worksheet :>> ', worksheet);
+            const imagePaths = getImagePaths(worksheet);
+            const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+            const headers = jsonData[0];
+            const table = XLSX.utils.sheet_to_html(worksheet);
+            const excelHtml = XLSX.utils.sheet_to_html(worksheet);
+            document.getElementById('excelTable').innerHTML = table;
+            let rows = excelHtml.split('</tr>');
+            rows.id = "rowid";
+            rowsall = excelHtml.split('</tr>'); // Now rowsall is accessible outside
+            rowsall.id = "rowid";
+
+            const tableRows = [];
+            // const headerRow = `<thead><tr class="hover">${rows[0]}</tr></thead>`;
+            const headerRow = `<thead><tr class="hover text-xl">${rows[0]}</tr></thead>`;
+
+            tableRows.push(headerRow);
+            for (let i = 1; i < rows.length; i++) {
+                const newCell = `
+                    <td class="flex items-center gap-3">
+                        <div class="avatar">
+                            <div class="mask mask-squircle w-12 h-12">
+                                <img src="${imagePaths[i - 1]}" alt="Image ${i}" class="mr-2">
+                            </div>
+                        </div>  
+                    </td>
+                `;
+
+                let cells = rows[i].split('</td>');
+                cells.id = "cellsid"
+                cells.splice(1, 0, newCell);
+                rows[i] = cells.join('</td>');
+
+                tableRows.push(`<tr class="hover">${rows[i]}</tr>`);
+            }
+
+            document.getElementById('excelTable').innerHTML = tableRows.join('');
+
+            const modalBox = document.querySelector('#my_modal_3 .modal-box');
+
+headers.forEach((header, index) => {
+  const label = document.createElement('label');
+  label.className = 'input input-bordered input-primary flex items-center gap-2';
+
+  let svgIcon = '';
+  if (index === 1) {
+    svgIcon = `
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" style="margin-left: 10px; cursor: pointer;">
+        <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+      </svg>
+    `;
+  }
+
+  label.innerHTML = `
+    <strong style="color: var(--primary);">${header}</strong>
+    <textarea class="textarea textarea-ghost textarea-xs w-full max-w-xs" placeholder=""></textarea>
+    ${svgIcon}
+  `;
+
+  document.getElementById('column1').appendChild(label);
+
+  if (svgIcon) {
+    label.querySelector('svg').addEventListener('click', function() {
+      document.querySelector("#imagebutton").click();
+    });
+  }
+
+
+});
+        };
+        reader.readAsArrayBuffer(file);
+    }
+});
+
+
+
+
+
+document.getElementById('imagebutton').addEventListener('click', function() {
+  document.getElementById('imageInputimagebutton').click();
+});
+let imgSrc = ''; 
+
+document.getElementById('imageInputimagebutton').addEventListener('change', function() {
+  const files = this.files;
+  console.log('files :>> ', files);
+  const tableBody = document.querySelector('#excelTable tbody');
+console.log('tableBody :>> ', tableBody);
+  if (!tableBody) {
+    console.error("Could not find table body element");
+    // alert("body not found")
+    return;
+  }
+
+  const totalColumns = tableBody.rows[1].cells.length; 
+
+  const imageColumnIndex = 1; 
+  let rowIndex = tableBody.rows.length;
+  for (let i = 0; i < files.length; i++) {
+    const file = files[i];
+    const reader = new FileReader();
+    reader.onload = function() {
+      const row = tableBody.insertRow(rowIndex);
+
+      for (let j = 0; j < totalColumns; j++) {
+        const cell = row.insertCell(j);
+        
+        console.log('cell :>> ', cell);
+        if (j === imageColumnIndex) {
+          const imgContainer = document.createElement('div');
+          imgContainer.className = 'flex items-center gap-3';
+
+          const avatarDiv = document.createElement('div');
+          avatarDiv.className = 'avatar';
+          console.log('avatarDiv :>> ', avatarDiv);
+          const maskDiv = document.createElement('div');
+          console.log('maskDiv :>> ', maskDiv);
+          maskDiv.className = 'mask mask-squircle w-12 h-12';
+          
+          const img = document.createElement('img');
+          img.src = reader.result;
+          img.alt = `Image ${i + 1}`;
+
+          if (img.src) {
+            imgSrc = img.src; // Store the image source URL
+
+            console.log('Image added successfully');
+            // alert("image added ")
+          } else {
+            console.log('Failed to add image');
+            alert("image failed try again later")
+          }
+
+        //   console.log('maskDiv :>> ', maskDiv);
+        //   maskDiv.appendChild(img);
+        //   avatarDiv.appendChild(maskDiv);
+        //   console.log('avatarDiv :>> ', avatarDiv);
+        //   imgContainer.appendChild(avatarDiv);
+        //   cell.appendChild(imgContainer);
+        }
+      }
+      rowIndex++;
+    };
+    
+    reader.readAsDataURL(file);
+  }
+});
+
+// Assuming rows is an array of row data
+let currentRow = 0;
+
+document.getElementById('nextbutton').addEventListener('click', function() {
+  // Split the row data into cells
+  const rowData = rowsall[currentRow].split('</td>');
+
+  const textareas = document.querySelectorAll('#my_modal_3 .modal-box textarea');
+  textareas.forEach((textarea, index) => {
+    // Remove any HTML tags from the cell data
+    const cellData = rowData[index].replace(/<[^>]*>?/gm, '');
+    textarea.value = cellData;
+  });
+
+  currentRow++;
+});
+
+
+document.getElementById('prebutton').addEventListener('click', function() {
+  currentRow--;
+
+  if (currentRow >= 0) {
+    const rowData = rowsall[currentRow].split('</td>');
+
+    const textareas = document.querySelectorAll('#my_modal_3 .modal-box textarea');
+    textareas.forEach((textarea, index) => {
+      // Check if rowData[index] is not undefined
+      if (rowData[index]) {
+        // Remove any HTML tags from the cell data
+        const cellData = rowData[index].replace(/<[^>]*>?/gm, '');
+        textarea.value = cellData;
+      }
+    });
+  } else {
+    currentRow = rowsall.length - 1;
+
+    // Split the row data into cells
+    const rowData = rowsall[currentRow].split('</td>');
+
+    const textareas = document.querySelectorAll('#my_modal_3 .modal-box textarea');
+    textareas.forEach((textarea, index) => {
+      // Check if rowData[index] is not undefined
+      if (rowData[index]) {
+        // Remove any HTML tags from the cell data
+        const cellData = rowData[index].replace(/<[^>]*>?/gm, '');
+        textarea.value = cellData;
+      }
+    });
+  }
+});
+
+document.querySelector('#searchinput-input').addEventListener('keyup', function() {
+
+    const searchTerm = this.value.toLowerCase();
+
+    const rowIndex = rowsall.findIndex(row => {
+
+    const rowText = row.toLowerCase().replace(/<[^>]*>?/gm, '');
+    return rowText.includes(searchTerm);
+  });
+
+  if (rowIndex !== -1) {
+    currentRow = rowIndex;
+
+    const rowData = rowsall[currentRow].split('</td>');
+
+    const textareas = document.querySelectorAll('#my_modal_3 .modal-box textarea');
+    textareas.forEach((textarea, index) => {
+      if (rowData[index]) {
+
+        const cellData = rowData[index].replace(/<[^>]*>?/gm, '');
+        textarea.value = cellData;
+      }
+    });
+  } else {
+
+    const textareas = document.querySelectorAll('#my_modal_3 .modal-box textarea');
+    textareas.forEach((textarea) => {
+      textarea.value = '';
+    });
+  }
+});
+
+const tableBody = document.querySelector('#excelTable tbody');
+console.log('tableBody :>> ', tableBody);
+
+document.getElementById('addbutton').addEventListener('click', function() {
+const newRow = document.createElement('tr');
+const inputs = document.querySelectorAll('#column1 textarea');
+const labels = document.querySelectorAll('#column1 label');
+inputs.forEach((input, index) => {
+    const newCell = document.createElement('td');
+
+    if (index === 1 && imgSrc) { // If this is the image column and an image has been added
+          const img = document.createElement('img');
+          img.src = imgSrc;
+          img.alt = 'Added image';
+          const imgContainer = document.createElement('div');
+          imgContainer.className = 'flex items-center gap-3';
+
+
+          const avatarDiv = document.createElement('div');
+          avatarDiv.className = 'avatar';
+          console.log('avatarDiv :>> ', avatarDiv);
+          const maskDiv = document.createElement('div');
+          console.log('maskDiv :>> ', maskDiv);
+          maskDiv.className = 'mask mask-squircle w-12 h-12';
+
+          maskDiv.appendChild(img);
+          avatarDiv.appendChild(maskDiv);
+          console.log('avatarDiv :>> ', avatarDiv);
+          imgContainer.appendChild(avatarDiv);
+          newCell.appendChild(imgContainer);
+
+        } else {
+      newCell.textContent = input.value;
+    }
+
+    newRow.appendChild(newCell);
+  });
+
+  document.querySelector('#excelTable tbody').appendChild(newRow);
+
+});
+
+document.getElementById('toggle').addEventListener('change', function() {
+  const table = document.querySelector("body > div:nth-child(4) > div.overflow-x-auto");
+  if(this.checked) {
+
+        table.contentEditable = 'false';
+  } else {
+
+    document.getElementById('passwordModal').showModal();
+    const modal = document.getElementById('passwordModal');
+
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.close();
+  }
+};
+
+  }
+});
+
+document.getElementById('submitPassword').addEventListener('click', function() {
+  const passwordInput = document.getElementById('passwordInput').value;
+  if(passwordInput === '900') {
+
+    document.querySelector("body > div:nth-child(4) > div.overflow-x-auto").contentEditable = 'true';
+    document.getElementById('passwordModal').close();
+  } else {
+
+    alert('Incorrect password');
+    const modal = document.getElementById('passwordModal');
+
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.close();
+  }
+};
+
+  }
+});
+            function getImagePaths(sheet) {
+                const imagePaths = [];
+                const range = XLSX.utils.decode_range(sheet['!ref']);
+                console.log('Sheet range:', range);
+
+                const imageColumnIndex = 3; 
+
+                for (let row = range.s.r; row <= range.e.r; row++) {
+                    const cellAddress = XLSX.utils.encode_cell({ r: row, c: imageColumnIndex });
+                    const cell = sheet[cellAddress];
+
+                    if (cell && cell.t === 's') {
+                        const value = sheet[cellAddress].v;
+
+                        if (value.endsWith('.jpg') || value.endsWith('.png')) {
+                            imagePaths.push(value);
+                        }
+                    }
+                }
+
+                console.log('Found image paths:', imagePaths);
+                return imagePaths;
+            }
+
+            let headers = [];
+            let rowsall; // Define rowsall here
+//             const fileUrl = 'app1.xlsx';
+
+// function readFile() {
+//     // const fileUrl = 'app1.xlsx';
+
+//     const xhr = new XMLHttpRequest();
+//     xhr.open('GET', fileUrl, true);
+//     xhr.responseType = 'arraybuffer';
+
+//     xhr.onload = function (e) {
+//         if (xhr.status === 200) {
+//             const data = new Uint8Array(xhr.response);
+//             const workbook = XLSX.read(data, { type: 'array' });
+//             const worksheet = workbook.Sheets[workbook.SheetNames[0]];
+//             console.log('worksheet :>> ', worksheet);
+//             const imagePaths = getImagePaths(worksheet);
+//             const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+//             const headers = jsonData[0];
+//             const table = XLSX.utils.sheet_to_html(worksheet);
+//             const excelHtml = XLSX.utils.sheet_to_html(worksheet);
+//             document.getElementById('excelTable').innerHTML = table;
+//             let rows = excelHtml.split('</tr>');
+//             rows.id = "rowid";
+//             rowsall = excelHtml.split('</tr>'); // Now rowsall is accessible outside
+//             rowsall.id = "rowid";
+
+//             const tableRows = [];
+//             const headerRow = `<thead><tr class="hover">${rows[0]}</tr></thead>`;
+//             tableRows.push(headerRow);
+//             for (let i = 1; i < rows.length; i++) {
+//                 const newCell = `
+//                     <td class="flex items-center gap-3">
+//                         <div class="avatar">
+//                             <div class="mask mask-squircle w-12 h-12">
+//                                 <img src="${imagePaths[i - 1]}" alt="Image ${i}" class="mr-2">
+//                             </div>
+//                         </div>  
+//                     </td>
+//                 `;
+
+//                 let cells = rows[i].split('</td>');
+//                 cells.id = "cellsid"
+//                 cells.splice(1, 0, newCell);
+//                 rows[i] = cells.join('</td>');
+
+//                 tableRows.push(`<tr class="hover">${rows[i]}</tr>`);
+//             }
+
+//             document.getElementById('excelTable').innerHTML = tableRows.join('');
+
+//   const modalBox = document.querySelector('#my_modal_3 .modal-box');
+
+
+
+//   headers.forEach((header, index) => {
+//   const label = document.createElement('label');
+//   label.className = 'input input-bordered input-primary flex items-center gap-2';
+
+//   let svgIcon = '';
+//   if (index === 1) {
+//     svgIcon = `
+//       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" style="margin-left: 10px; cursor: pointer;">
+//         <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+//       </svg>
+//     `;
+//   }
+
+//   label.innerHTML = `
+//     <strong style="color: var(--primary);">${header}</strong>
+//     <textarea class="textarea textarea-ghost textarea-xs w-full max-w-xs" placeholder=""></textarea>
+//     ${svgIcon}
+//   `;
+
+//   document.getElementById('column1').appendChild(label);
+
+//   if (svgIcon) {
+//     label.querySelector('svg').addEventListener('click', function() {
+//       document.querySelector("#imagebutton").click();
+//     });
+//   }
+
+
+// });
+
+//         }else {
+//             console.error('Error loading file:', xhr.status);
+//         }
+//     };
+
+//     xhr.send();
+// }
+
+
+(function() {
+    const fileUrl = 'app1.xlsx';
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', fileUrl, true);
+    xhr.responseType = 'arraybuffer';
+
+    xhr.onload = function(e) {
+        if (xhr.status === 200) {
+            const data = new Uint8Array(xhr.response);
+            const workbook = XLSX.read(data, { type: 'array' });
+            const worksheet = workbook.Sheets[workbook.SheetNames[0]];
+            console.log('worksheet :>> ', worksheet);
+            const imagePaths = getImagePaths(worksheet);
+            const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+            const headers = jsonData[0];
+            const table = XLSX.utils.sheet_to_html(worksheet);
+            const excelHtml = XLSX.utils.sheet_to_html(worksheet);
+            document.getElementById('excelTable').innerHTML = table;
+            let rows = excelHtml.split('</tr>');
+            rows.id = "rowid";
+            rowsall = excelHtml.split('</tr>'); // Now rowsall is accessible outside
+            rowsall.id = "rowid";
+
+            const tableRows = [];
+            const headerRow = `<thead><tr class="hover">${rows[0]}</tr></thead>`;
+            tableRows.push(headerRow);
+            for (let i = 1; i < rows.length; i++) {
+                const newCell = `
+                    <td class="flex items-center gap-3">
+                        <div class="avatar">
+                            <div class="mask mask-squircle w-12 h-12">
+                                <img src="${imagePaths[i - 1]}" alt="Image ${i}" class="mr-2">
+                            </div>
+                        </div>
+                    </td>
+                `;
+
+                let cells = rows[i].split('</td>');
+                cells.id = "cellsid"
+                cells.splice(1, 0, newCell);
+                rows[i] = cells.join('</td>');
+
+                tableRows.push(`<tr class="hover">${rows[i]}</tr>`);
+            }
+
+            document.getElementById('excelTable').innerHTML = tableRows.join('');
+
+            const modalBox = document.querySelector('#my_modal_3 .modal-box');
+
+            // headers.forEach((header, index) => {
+            //     const label = document.createElement('label');
+            //     label.className = 'input input-bordered input-primary flex items-center gap-2';
+
+            //     let svgIcon = '';
+            //     if (index === 1) {
+            //         svgIcon = `
+            //             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" style="margin-left: 10px; cursor: pointer;">
+            //                 <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+            //             </svg>
+            //         `;
+            //     }
+
+            //     label.innerHTML = `
+            //         <strong style="color: var(--primary);">${header}</strong>
+            //         <textarea class="textarea textarea-ghost textarea-xs w-full max-w-xs" placeholder=""></textarea>
+            //         ${svgIcon}
+            //     `;
+
+            //     document.getElementById('column1').appendChild(label);
+
+            //     if (svgIcon) {
+            //         label.querySelector('svg').addEventListener('click', function() {
+            //             document.querySelector("#imagebutton").click();
+            //         });
+            //     }
+            // });
+       
+       
+//             headers.forEach((header, index) => {
+//     const label = document.createElement('label');
+//     label.className = 'input input-bordered input-primary flex items-center gap-2';
+
+//     let svgIcon = '';
+//     if (index === 1) {
+//         svgIcon = `
+//             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" style="margin-left: 10px; cursor: pointer;">
+//                 <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+//             </svg>
+//         `;
+//     }
+
+//     // Add the 'disabled' attribute to the second textarea and make it smaller
+//     const textareaClass = index === 1 ? 'textarea textarea-xs w-full max-w-xs smaller-textarea' : 'textarea textarea-ghost textarea-xs w-full max-w-xs';
+//     label.innerHTML = `
+//         <strong style="color: var(--primary);">${header}</strong>
+//         <textarea class="${textareaClass}" placeholder="" ${index === 1 ? 'disabled' : ''}></textarea>
+//         ${svgIcon}
+//     `;
+
+//     document.getElementById('column1').appendChild(label);
+
+//     if (svgIcon) {
+//         label.querySelector('svg').addEventListener('click', function() {
+//             document.querySelector("#imagebutton").click();
+//         });
+//     }
+// });
+
+headers.forEach((header, index) => {
+    const label = document.createElement('label');
+    label.className = 'input input-bordered input-primary flex items-center gap-2';
+
+    let svgIcon = '';
+    if (index === 1) {
+        svgIcon = `
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" style="margin-left: 10px; cursor: pointer;">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+            </svg>
+        `;
+    }
+
+    label.innerHTML = `
+        <div class="flex justify-between items-center w-full">
+            <strong style="color: var(--primary);">${header}</strong>
+            ${index === 1 ? '' : '<textarea class=" border-b-4 border-t-4  border-solid textarea textarea-ghost textarea-xs w-full max-w-xs" placeholder=""></textarea>'}
+            ${svgIcon}
+        </div>
+    `;
+
+    document.getElementById('column1').appendChild(label);
+
+    if (svgIcon) {
+        label.querySelector('svg').addEventListener('click', function() {
+            document.querySelector("#imagebutton").click();
+        });
+    }
+});
+     
+
+} else {
+            console.error('Error loading file:', xhr.status);
+        }
+    };
+
+    xhr.send();
+})();
+
+            function saveData() {
+              const worksheet = XLSX.utils.table_to_sheet(document.getElementById('excelTable'));
+  const workbook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+  XLSX.writeFile(workbook, 'data.xlsx');
+            }
+ 
+            let hasReadFileRun = false;
+
+window.onload = function() {
+  if (!hasReadFileRun) {
+    readFile();
+    hasReadFileRun = true;
+  }
+};
+
+            // document.getElementById('file-input-xl').addEventListener('change', readFile, false);
+            document.getElementById('searchInput').addEventListener('keyup', function() {
+            console.log("object");
+            const searchValue = this.value.toLowerCase();
+            console.log('searchValue :>> ', searchValue);
+            const tableRows = document.querySelectorAll('#excelTable tr');
+
+            for (let i = 1; i < tableRows.length; i++) { // Start from 1 to skip the header row
+                const rowText = tableRows[i].textContent.toLowerCase();
+
+                if (rowText.includes(searchValue)) {
+                    tableRows[i].style.display = ''; // Show row
+                } else {
+                    tableRows[i].style.display = 'none'; // Hide row
+                }
+            }
+            });
+
+            document.getElementById('openTableButton').addEventListener('click', function() {
+                document.getElementById('my_modal_3').showModal();
+            });
+        
+        
+        </script>
+        </script>
+        </script>
+    </body>
+</html>
